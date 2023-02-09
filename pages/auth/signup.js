@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 import { useRouter } from "next/router";
-import styles from '../styles/login.module.css';
+import styles from '../../styles/login.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -22,48 +22,28 @@ export default function login(){
             setError('Please enter email and password')
             return
         }
-        if (isLoggingIn) {
-            try {
-                const login_ = login(email, password);
-                setLoginStatus();
-                route.push("/dashboard");
-            } catch (err) {
-                setError('Incorrect email or password')
-            }
-            return
+
+        try {
+            const signup_ = await signup(email, password);
+            route.push("/auth/signin");
+        } catch (err) {
+            setError('Incorrect email or password')
         }
-        const signup_ = await signup(email, password);
-        setLoginStatus_();
     }
 
-    function setLoginStatus_(){
-        if(isLoggingIn)
-        { 
-            setIsLoggingIn(false);
-        }else if(!isLoggingIn)
-            setIsLoggingIn(true);
-    }
-    function setLoginStatus(event){
-        event.preventDefault();
-        if(isLoggingIn)
-        { 
-            setIsLoggingIn(false);
-        }else if(!isLoggingIn)
-            setIsLoggingIn(true);
-    }
     return(
-       <>
+        <>
             <Head>
-                <title>Login Page</title>
+                <title>Sign up</title>
             </Head>
             <header className={styles.header}>
                 <h1 className={styles.headerLogo}>LinkInMyBio</h1>
-                <Link href="/signup" className={styles.headerText} onClick={setLoginStatus}>{isLoggingIn ? "Don't have an account" : 'I already have an account'}</Link>
+                <Link href="/auth/signin" className={styles.headerText}>I already have an account</Link>
             </header>
             <div className={styles.container}>
                 <div className={styles.containerImagesection}>
                     <Image
-                     src={isLoggingIn ? "/images/imagelg1.png" : "/images/imagelg.png"}
+                     src={"/images/imagelg.png"}
                     alt=""
                     className={styles.imagesectionImage}
                     height={650}
@@ -71,7 +51,7 @@ export default function login(){
                 </div>
                 <div className={styles.containerLoginsection}>
                     <form className={styles.loginsectionLoginform}>
-                        <h1 className={styles.loginformHeadtext}>{isLoggingIn ? "Login into your account" : "Create an account."}</h1>
+                        <h1 className={styles.loginformHeadtext}>Create an account.</h1>
             
                         <input 
                             type="email"
@@ -95,6 +75,5 @@ export default function login(){
                 </div>
             </div>
        </>
-    );
+    )
 }
-

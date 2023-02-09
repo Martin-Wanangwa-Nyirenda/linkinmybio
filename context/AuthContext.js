@@ -25,6 +25,7 @@ export function AuthProvider({ children }) {
     function login(email, password) {
         return signInWithEmailAndPassword(auth, email, password).then(() => {
            console.log("Login successful!..");
+           
         }).catch((error)=>{
             console.log(error);
         });
