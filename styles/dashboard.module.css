@@ -1,0 +1,114 @@
+.wrapImage{
+    height: 175px;
+    width: 175px; 
+}
+
+.wrapImage:hover{
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    cursor: pointer;
+}
+
+.wrapText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.itemWrap{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.containerOverlay{
+    backdrop-filter: blur(3px);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+}
+
+.overlayForm{
+    position: fixed;
+    z-index: 1001;
+    background-color: whitesmoke;
+    top: 30%;
+    left: 26%;
+    padding: 20px 60px;
+    box-shadow: 4px 6px 10px lightgray;
+}
+
+.formLabels{
+    display: block;
+    margin: 10px 0px;
+    font-size: 11px;
+}
+
+.formInputs{
+    width: 500px;
+    height: 40px;
+    padding: 0px 20px;
+    outline: none;
+    border: 1px solid black;
+}
+.btnCancel{
+    font-size: 20px;
+    color: black;
+    margin-right: 40px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.btnSave{
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+.formBtns{
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
+.image{
+    height: 175px;
+    width: 175px;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 5px;
+}
+.logoText{
+    font-size: 14px;
+    display: block;
+    font-weight: 600;
+}
+.logoImage{
+    border-radius: 50%;
+    height: 95px;
+    width: 95px;
+}
+.logo{
+    margin-bottom: 30px;
+}
+.image:hover{
+    filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+.head{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
