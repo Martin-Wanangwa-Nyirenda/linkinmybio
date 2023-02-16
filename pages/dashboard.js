@@ -3,46 +3,36 @@ import Link from 'next/link';
 import { useAuth } from '../context/AuthContext'
 import styles from '../styles/dashboard.module.css';
 import Image from 'next/image';
-import { storage } from '../lib/firebase';
-import {uploadBytes, ref, getDownloadURL} from 'firebase/storage';
-import { v4 } from "uuid";
 import { db } from '../lib/firebase';
-import {doc, setDoc} from 'firebase/firestore'
 import { collection, getDocs } from "firebase/firestore";
+import React from 'react';
+import UploadForm  from '../components/UploadForm';
+import EditForm from '../components/EditForm';
 
 export default function dashboard() {
   const { userInfo, currentUser } = useAuth()
   const [ showForm, setShowForm ] = useState(false);
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
-  const [blogPostUrl, setBlogPostUrl] = useState(null);
-  const [instaPostUrl, setInstaPostUrl] = useState(null);
   const [queriedData, setQueriedData] = useState([]);
   const [Error, setError] = useState("")
   const [uploaded, setUploaded] = useState(0)//Updates everytime an upload happens to cause a useEffect
-
-  async function uploadData(event){
-    event.preventDefault();
-      try {
-        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-        let snapShot = await uploadBytes(imageRef, imageUpload);
-        let downloadUrl = await getDownloadURL(snapShot.ref);
-        let uploadData = await setDoc(doc(db, "users", currentUser.uid, "posts", v4()), {
-            imageUrl: downloadUrl,
-            instagramPostUrl: instaPostUrl,
-            BlogPostURL: blogPostUrl
-        });
-        changeFormVisibilityState();
-        setUploaded(uploaded + 1);
-      } catch (error) {
-        console.log(error);
-      }
-      
-  }
+  const [isEditFormMounted, setIsEditFormMounted] = useState(false)
+  const [selectedPost, setSelected] = useState("")
+  const inputRef = React.useRef(null)
 
   function changeFormVisibilityState(){
+    console.log("Running")
     setShowForm(!showForm);
   }
+
+  function changeEditFormVisibility(postid){
+    setSelected(postid);
+    setIsEditFormMounted(!isEditFormMounted);
+  }
+
+  function getUploaded(upd){
+    setUploaded(upd);
+  }
+
 
   useEffect(() => {
     if(currentUser.uid !== undefined){
@@ -54,7 +44,9 @@ export default function dashboard() {
           data.id = doc.id;
           return data;
         });
+        console.log(postData);
         setQueriedData(postData);
+        
       }
       console.log(currentUser.uid);
       fetchData();
@@ -63,25 +55,8 @@ export default function dashboard() {
 
   return (
     <div className={styles.container}>
-      <form className={styles.overlayForm} style={{visibility: showForm? "visible" : "hidden"}} method="post">
-            <div className={styles.formWeburl}>
-            <label className={styles.formLabels}>BlogPost URL</label>
-                <input type="url" className={styles.formInputs} onChange={(e) => setBlogPostUrl(e.target.value)} placeholder="https://www.myblog.com/post1"/>
-            </div>
-            <div className={styles.formPosturl}>
-                <label className={styles.formLabels} >Post URL</label>
-                <input className={styles.formInputs} type="url" onChange={(e) => setInstaPostUrl(e.target.value)} placeholder="https://www.myblog.com/post1"/>
-            </div>
-            <div className={styles.formImageinput}>
-                <input type="file" onChange={(e) => {setImageUpload(e.target.files[0])}}/>
-            </div>
-            <div className={styles.formBtns}>
-                <a className={styles.btnCancel} onClick={changeFormVisibilityState}>Cancel</a>
-                <button type="submit" className={styles.btnSave} onClick={async (e) => {await uploadData(e);}}>Save</button>
-            </div>
-      </form>
-      <div className={styles.containerOverlay} style={{visibility: showForm? "visible" : "hidden"}}>  
-      </div>
+      <UploadForm onUpload={getUploaded} changeFormVisibilityState={changeFormVisibilityState} showForm={showForm}/>
+      {isEditFormMounted && <EditForm postid={selectedPost} formvisibilityhandler={changeEditFormVisibility} onUpload={getUploaded} postsdata={queriedData}/>} 
       <div className={styles.content}>
           <div className={styles.head}>
               <div className={styles.logo}>
@@ -95,7 +70,7 @@ export default function dashboard() {
           <div className={styles.gridContainer}>
 
               <div className={styles.gridItem}>
-                  <div className={styles.itemWrap} onClick={changeFormVisibilityState}>
+                  <div className={styles.itemWrap} onClick={() => {changeFormVisibilityState()}}>
                       <Image className={styles.wrapImage} src="/Images/ads/Image1.png" alt="Image"
                       height={175}
                       width={175}/>
@@ -103,14 +78,12 @@ export default function dashboard() {
               </div>
               {currentUser.uid !== undefined ? 
                 queriedData.map(post =>(
-                <div className={styles.gridItem} key={post.id}>
-                      <Link href={post.BlogPostURL}>
+                <div className={styles.gridItem} key={post.id} onClick={() => {changeEditFormVisibility(post.id)}}>
                       <div className={styles.itemWrap}>
                         {post.imageUrl && <Image className={styles.wrapImage} src={post.imageUrl} alt="Image"
                         height={175}
                         width={175}/> }
                       </div>
-                    </Link>
                 </div>
             )) : <p>Loading...</p>}
                   

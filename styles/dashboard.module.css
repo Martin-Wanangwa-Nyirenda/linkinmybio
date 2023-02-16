@@ -1,3 +1,39 @@
+.formImageinput_image{
+    display: block;
+    margin: 10px 0;
+    width: 150px;
+    height: 120px;
+    background-color: rgb(221, 196, 196);
+}
+.imageSelectBtn{
+    border: 1px solid black;
+    background-color: white;
+    padding: 7px 10px;
+    cursor: pointer;
+}
+.imageSelectBtn:hover{
+    background-color: black;
+    color: white;
+    padding: 7px 10px;
+}
+.btnDelete{
+    border: 1px solid black;
+    background-color: white;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 40px;
+    font-size: 20px;
+}
+.btnDelete:hover{
+    background-color: black;
+    color: white;
+}
+
+.formImageinput input{
+    visibility: hidden;
+}
+
 .wrapImage{
     height: 175px;
     width: 175px; 
@@ -35,7 +71,7 @@
     position: fixed;
     z-index: 1001;
     background-color: whitesmoke;
-    top: 30%;
+    top: 20%;
     left: 26%;
     padding: 20px 60px;
     box-shadow: 4px 6px 10px lightgray;
@@ -61,6 +97,11 @@
     font-weight: 500;
     cursor: pointer;
 }
+.btnCancel:hover{
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+}
 .btnSave{
     background-color: black;
     color: white;
@@ -69,6 +110,12 @@
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
+    border: 1px solid black;
+}
+.btnSave:hover{
+    color: black;
+    background-color: white;
+    border: 1px solid black;
 }
 .formBtns{
     display: flex;
