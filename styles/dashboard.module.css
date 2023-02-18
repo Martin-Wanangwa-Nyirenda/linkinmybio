@@ -5,6 +5,9 @@
     height: 120px;
     background-color: rgb(221, 196, 196);
 }
+.notification{
+    margin-top: 10px 5px;
+}
 .imageSelectBtn{
     border: 1px solid black;
     background-color: white;
@@ -37,6 +40,26 @@
 .wrapImage{
     height: 175px;
     width: 175px; 
+}
+
+.containerhead{
+    display: flex;
+    justify-content: flex-end;
+    max-width: 535px;
+    height: 30px;
+    margin:10px auto;
+}
+
+.addpostbtn{
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    padding: 5px 5px;
+    cursor: pointer;
+}
+.addpostbtn:hover{
+    background-color: white;
+    color: black;
 }
 
 .wrapImage:hover{
@@ -96,6 +119,7 @@
     margin-right: 40px;
     font-weight: 500;
     cursor: pointer;
+    padding: 5px 10px;
 }
 .btnCancel:hover{
     background-color: black;
@@ -112,6 +136,19 @@
     cursor: pointer;
     border: 1px solid black;
 }
+
+.btnSaveNotActive{
+    background-color: gray;
+    color: rgb(202, 189, 189);
+    padding: 5px 10px;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid white;
+    pointer-events: none;
+}
+
 .btnSave:hover{
     color: black;
     background-color: white;
@@ -126,13 +163,19 @@
 .image{
     height: 175px;
     width: 175px;
+    object-fit: contain;
 }
 .container{
+    width: 1088px;
+    margin: 0 auto;
+    padding-top: 20px;;
+}
+.content{
+    width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 10px;
 }
-
 .gridContainer {
     display: grid;
     grid-template-columns: auto auto auto;

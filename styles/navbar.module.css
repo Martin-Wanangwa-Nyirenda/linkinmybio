@@ -1,0 +1,32 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 1px 5px 2px lightblue;
+}
+
+.navbarlogo{
+    font-weight: 600;
+}
+
+.navbarprofile{
+    display: flex;
+    align-content: center;
+    cursor: pointer;
+    padding: 1px 2px;
+}
+
+.navbarprofile:hover{
+    background-color: rgba(145, 155, 217, 0.163);
+}
+.profileimage{
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+.profilename{
+    font-size: 14px;
+    padding-top: 3px;
+    color: black;
+}

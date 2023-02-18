@@ -16,16 +16,30 @@ export default function UploadForm(props){
     const [imageUpload, setImageUpload] = useState("/images/placeholder1.png");
     const [blogPostUrl, setBlogPostUrl] = useState(null);
     const [instaPostUrl, setInstaPostUrl] = useState(null);
-    const [Error, setError] = useState("")
+    const [notification, setNotification] = useState("")
     const inputRef = React.useRef(null)
     const [uploaded, setUploaded] = useState(0)
+
+    
+    async function handleImageSelect(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+            setImageUpload(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
 
     async function uploadData(event){
         event.preventDefault();
           try {
+            if((BlogPostURL === null) || (instaPostUrl === null) || (imageUpload === "/images/placeholder1.png")){
+                throw "All fields must have values"
+            }
             const imagePath = `images/${imageUpload.name + v4()}`;
             const imageRef = ref(storage, imagePath);
             let snapShot = await uploadBytes(imageRef, imageUpload);
+            setNotification("Uploading...")
             let downloadUrl = await getDownloadURL(snapShot.ref);
             let uploadData = await setDoc(doc(db, "users", currentUser.uid, "posts", v4()), {
                 imageUrl: downloadUrl,
@@ -35,11 +49,10 @@ export default function UploadForm(props){
             });
             props.changeFormVisibilityState();
             setUploaded(prev => prev + 1);
-            
+            setNotification("Upload successfully")
           } catch (error) {
-            console.log(error);
+            setNotification(error)
           }
-          
     }
     function clickInput(){
         inputRef.current.click();
@@ -63,12 +76,14 @@ export default function UploadForm(props){
                 <div className={styles.formImageinput}>
                     <img src={imageUpload} className={styles.formImageinput_image} alt="Click button below to select image"/>
                     <button className={styles.imageSelectBtn} onClick={async (e) => {await clickInput()}}>Select Image</button>
-                    <input ref={inputRef} type="file" accept=".jpeg, .jpg, .png" onChange={(e) => {setImageUpload(e.target.files[0])}}/>
+                    <input ref={inputRef} type="file" accept=".jpeg, .jpg, .png" onChange={(e) => {handleImageSelect(e)}}/>
                 </div>
                 <div className={styles.formBtns}>
                     <a className={styles.btnCancel} onClick={() => {props.changeFormVisibilityState()}}>Cancel</a>
                     <button className={styles.btnSave} onClick={async (e) => {await uploadData(e);}}>Save</button>
                 </div>
+
+                <div className={styles.notification}>{JSON.stringify(notification)}</div>
             </div>
             <div className={styles.containerOverlay} style={{visibility: props.showForm? "visible" : "hidden"}}>  
             </div>

@@ -23,6 +23,8 @@ export default function EditForm(props){
     const [Error, setError] = useState("")
     const inputRef = React.useRef(null)
     const [uploaded, setUploaded] = useState(0)
+    const [isUploading, setIsUploading] = useState(false)
+    const [DownloadUrlAvailable, setDownloadUrlAvailable] = useState(false);
 
     async function handleImageSelect(event) {
         const file = event.target.files[0];
@@ -31,10 +33,13 @@ export default function EditForm(props){
             setImageUpload(reader.result);
         };
         reader.readAsDataURL(file);
+        //Todo cancel ongoing upload
+        setDownloadUrlAvailable(false)
         const imageRef = ref(storage, post.AbsolutImagePath);
         let snapShot = await uploadBytes(imageRef, file);
         let downloadURL = await getDownloadURL(snapShot.ref);
         setimageDownloadUrl(downloadURL);  
+        setDownloadUrlAvailable(true)
     }
 
     async function editData(event){
@@ -75,14 +80,15 @@ export default function EditForm(props){
     }
 
     useEffect(() => {
-        console.log("Save")
-    }, [imageDownloadUrl])
-
-
-    useEffect(() => {
-        console.log("This run 3")
         props.onUpload(uploaded);
     }, [uploaded])
+
+    useEffect(() => {
+        setDownloadUrlAvailable(false);
+    }, [])
+    function textHandler(){
+        setDownloadUrlAvailable(true)
+    }
     
     return(
         <>
@@ -93,11 +99,15 @@ export default function EditForm(props){
                         setBlogPostUrl(e.target.value)
                         setIsFieldsUpdated(true)
                         setIsUpdated(true)
+                        textHandler()
                         }}/>
                 </div>
                 <div className={styles.formPosturl}>
                     <label className={styles.formLabels} >Post URL</label>
-                    <input className={styles.formInputs} type="url" onChange={(e) => setInstaPostUrl(e.target.value)} value={instaPostUrl} />
+                    <input className={styles.formInputs} type="url" value={instaPostUrl} onChange={(e) => {
+                        setInstaPostUrl(e.target.value)
+                        textHandler()
+                        }}/>
                 </div>
                 <div className={styles.formImageinput}>
                     <img src={imageUpload} className={styles.formImageinput_image} alt="Click button below to select image"/>
@@ -110,7 +120,7 @@ export default function EditForm(props){
                 <div className={styles.formBtns}>
                     <button className={styles.btnDelete} onClick={async (e) => {deletePost()}}>Delete</button>
                     <a className={styles.btnCancel} onClick={() => {props.formvisibilityhandler("")}}>Cancel</a>
-                    <button className={styles.btnSave} onClick={async (e) => {await editData(e);}}>Save</button>
+                    <button className={DownloadUrlAvailable ? styles.btnSave : styles.btnSaveNotActive} onClick={async (e) => {await editData(e);}}>Save</button>
                 </div>
             </div>
             <div className={styles.containerOverlay}>  
