@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { useAuth } from '../context/AuthContext'
 import styles from '../styles/dashboard.module.css';
 import Image from 'next/image';
@@ -19,11 +18,9 @@ export default function dashboard() {
   const [isEditFormMounted, setIsEditFormMounted] = useState(false)
   const [selectedPost, setSelected] = useState("")
   const inputRef = React.useRef(null)
-
-  console.log(JSON.stringify(currentUser))
+  const [userlink, setUserLink] = useState("https://nextjs.org/docs/messages/fast-refresh-reload")
 
   function changeFormVisibilityState(){
-    console.log("Running")
     setShowForm(!showForm);
   }
 
@@ -47,11 +44,9 @@ export default function dashboard() {
           data.id = doc.id;
           return data;
         });
-        console.log(postData);
         setQueriedData(postData);
         
       }
-      console.log(currentUser.uid);
       fetchData();
     }
   }, [currentUser.uid, uploaded]);
@@ -59,11 +54,17 @@ export default function dashboard() {
   return (
     <div>
       <NavBar />
-      
       <div className={styles.container}>
         <UploadForm onUpload={getUploaded} changeFormVisibilityState={changeFormVisibilityState} showForm={showForm}/>
         {isEditFormMounted && <EditForm postid={selectedPost} formvisibilityhandler={changeEditFormVisibility} onUpload={getUploaded} postsdata={queriedData}/>} 
+        
+
         <div className={styles.containerhead}>
+          <div className={styles.userlinkwrapper}>
+            <span className={styles.userLinkLabel}>Your link</span>
+            <span className={styles.userlink}>{userlink}</span>
+            <button className={styles.btnCopy}>Copy</button>
+          </div>
           <button className={styles.addpostbtn} onClick={() => changeFormVisibilityState()}>Add Post</button>
         </div>
         

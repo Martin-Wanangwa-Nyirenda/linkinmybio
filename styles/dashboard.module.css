@@ -5,6 +5,34 @@
     height: 120px;
     background-color: rgb(221, 196, 196);
 }
+.userlink{
+    padding: 5px 3px;
+    border: 1px solid black;
+    font-size: 14px;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+.userlinkwrapper{
+    margin-right: 5px;
+    padding-right: 5px;
+}
+.userLinkLabel{
+    font-size: 14px;
+}
+.btnCopy{
+    background-color: black;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+.btnCopy:hover{
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
 .notification{
     margin-top: 10px 5px;
 }
@@ -44,7 +72,7 @@
 
 .containerhead{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     max-width: 535px;
     height: 30px;
     margin:10px auto;
@@ -110,7 +138,7 @@
     width: 500px;
     height: 40px;
     padding: 0px 20px;
-    outline: none;
+    outline: rgba(111, 66, 66, 0.675);
     border: 1px solid black;
 }
 .btnCancel{

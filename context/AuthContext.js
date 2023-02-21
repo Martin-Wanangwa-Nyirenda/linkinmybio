@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from "../lib/firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+import {doc, setDoc} from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 const AuthContext = React.createContext();
 
@@ -13,8 +15,13 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true)
 
     function signup(email, password) {
-        createUserWithEmailAndPassword(auth, email, password).then(() => {
-            console.log("Sign up successful!");
+        createUserWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
+            const user = userCredential.user
+            await setDoc(doc(db, "users", user.uid), {
+                profileImage : "/images/defaultprofileimage.png",
+                pagename : "Click to edit profile",
+                pagepublicURL : `/${user.id}`
+            });
         }).catch((error)=>{
             console.log(error);
         });
