@@ -7,7 +7,7 @@ import { collection, getDocs } from "firebase/firestore";
 import React from 'react';
 import UploadForm  from '../components/UploadForm';
 import EditForm from '../components/EditForm';
-import NavBar from '../components/navbar';
+import NavBar from '../components/NavBar';
 import { createShareURL } from '../lib/helperFunctions';
 import { useRouter } from "next/router";
 import Head from 'next/head';
