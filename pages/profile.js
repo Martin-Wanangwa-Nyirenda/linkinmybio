@@ -1,4 +1,4 @@
-import NavBar from "../components/navbar";
+import NavBar from "../components/NavBar";
 import { useAuth } from '../context/AuthContext'
 import { db, storage } from '../lib/firebase';
 import React, { useState, useEffect } from "react";
