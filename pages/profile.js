@@ -8,6 +8,7 @@ import Notification from '../components/notification';
 import { useRouter } from "next/router";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import {uploadBytes, ref, getDownloadURL} from 'firebase/storage';
+import Head from 'next/head';
 
 export default function Profile(){
     const { userInfo, logout, currentUser } = useAuth()
@@ -82,6 +83,9 @@ export default function Profile(){
 
     return(
         <>
+            <Head>
+                <title>Profile</title>
+            </Head>
             <NavBar />
             <div className={styles.container}>
                 <div className={styles.imagewrapper}>

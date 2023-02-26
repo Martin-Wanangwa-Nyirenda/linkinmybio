@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { useRouter } from "next/router";
 import styles from '../../styles/login.module.css';
@@ -35,6 +35,7 @@ export default function login(){
             setError('Incorrect email or password')
         }
     }
+    
 
     return(
         <>

@@ -7,6 +7,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db, storage } from '../../lib/firebase';
 import { doc, getDoc } from "firebase/firestore";
 import {ref, getDownloadURL} from 'firebase/storage';
+import Head from 'next/head';
 
 export default function Posts(){
   const [queriedData, setQueriedData] = useState([]);
@@ -48,6 +49,9 @@ export default function Posts(){
   
   return(
     <div className={styles.container}>
+      <Head>
+          <title>{pageName}</title>
+      </Head>
       <div className={styles.head}>
               <div className={styles.logo}>
                   <img className={styles.logoImage} src={profileImage}/>

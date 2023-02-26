@@ -10,6 +10,7 @@ import EditForm from '../components/EditForm';
 import NavBar from '../components/navbar';
 import { createShareURL } from '../lib/helperFunctions';
 import { useRouter } from "next/router";
+import Head from 'next/head';
 
 export default function dashboard() {
   const { userInfo, currentUser } = useAuth()
@@ -21,13 +22,13 @@ export default function dashboard() {
   const [selectedPost, setSelected] = useState("")
   const [isCopied, setIsCopied] = useState(false);
   const inputRef = React.useRef(null)
-  const shareURL = createShareURL(currentUser.uid);
+  
   const route = useRouter()
   if(currentUser === null){
     route.push("/auth/signin");
     return
   }
-
+  const shareURL = createShareURL(currentUser.uid);
 
   function changeFormVisibilityState(){
     setShowForm(!showForm);
@@ -57,6 +58,7 @@ export default function dashboard() {
         
       }
       fetchData();
+      
     }
   }, [currentUser.uid, uploaded]);
 
@@ -69,6 +71,9 @@ export default function dashboard() {
   }
   return (
     <div>
+      <Head>
+          <title>Dashboard</title>
+      </Head>
       <NavBar />
       <div className={styles.container}>
         <UploadForm onUpload={getUploaded} changeFormVisibilityState={changeFormVisibilityState} showForm={showForm}/>

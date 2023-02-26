@@ -1,6 +1,7 @@
 import styles from "../../styles/signout.module.css"
 import { useRouter } from "next/router";
 import { useAuth } from '../../context/AuthContext'
+import Head from 'next/head';
 
 export default function SignOut(){
     const { logout } = useAuth()
@@ -13,6 +14,9 @@ export default function SignOut(){
 
     return(
         <>
+            <Head>
+                <title>Log out</title>
+            </Head>
             <div className={styles.container}>
                 <span className={styles.text}>Are you sure, you want to logout?</span>
                 <div className={styles.buttons}>
