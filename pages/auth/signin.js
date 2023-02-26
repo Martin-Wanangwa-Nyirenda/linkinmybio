@@ -15,6 +15,11 @@ export default function login(){
 
     const { login, signup, currentUser } = useAuth();
     const route = useRouter();
+
+    if(currentUser !== null){
+        route.push("/dashboard");
+        return
+    }
     
     async function submitHandler(event) {
         event.preventDefault();
@@ -38,7 +43,6 @@ export default function login(){
             </Head>
             <header className={styles.header}>
                 <h1 className={styles.headerLogo}>LinkInMyBio</h1>
-                <Link href="/auth/signup" className={styles.headerText}>Don't have an account</Link>
             </header>
             <div className={styles.container}>
                 <div className={styles.containerImagesection}>
@@ -47,7 +51,8 @@ export default function login(){
                     alt=""
                     className={styles.imagesectionImage}
                     height={650}
-                    width={650}/>
+                    width={650}
+                    />
                 </div>
                 <div className={styles.containerLoginsection}>
                     <form className={styles.loginsectionLoginform}>
@@ -71,7 +76,8 @@ export default function login(){
                             onClick={submitHandler} 
                             value="Continue"/>
                     </form>
-                    
+
+                    <Link href="/auth/signup" className={styles.accountStatus}>I don't have an account</Link>
                 </div>
             </div>
        </>

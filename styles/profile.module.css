@@ -77,7 +77,6 @@
     background-color: gray;
     color: rgb(202, 189, 189);
     padding: 5px 10px;
-    border: none;
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
@@ -95,4 +94,115 @@
     height: 95px;
     width: 95px;
     display: block;
+}
+@media only screen and (min-width: 320px) and (max-width: 400px){
+    .container{
+        margin-top: 10px;
+        max-width: 100%;
+        background-color: white;
+        padding-top: 20px;
+    }
+    .btnSave{
+        background-color: black;
+        color: white;
+        padding: 5px 5px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .btnSaveNotActive{
+        background-color: gray;
+        color: rgb(202, 189, 189);
+        padding: 5px 5px;
+        border: none;
+        padding: 5px 5px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 500;
+        border: 1px solid white;
+        pointer-events: none;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .form{
+        margin-top: 10px;
+        padding: 10px 15px;  
+    }
+    .btnLogout{
+        background-color: black;
+        color: white;
+        padding: 5px 5px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .PageNameInput{
+        width: 90%;
+        height: 40px;
+        padding: 0px 10px;
+        outline: none;
+        border: 1px solid black;
+    }
+}
+
+@media only screen and (min-device-width : 402px) and (max-device-width : 600px){
+    .container{
+        margin-top: 10px;
+        max-width: 100%;
+        background-color: white;
+        padding-top: 20px;
+    }
+    .btnSave{
+        background-color: black;
+        color: white;
+        padding: 5px 5px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .btnSaveNotActive{
+        background-color: gray;
+        color: rgb(202, 189, 189);
+        padding: 5px 5px;
+        border: none;
+        padding: 5px 5px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 500;
+        border: 1px solid white;
+        pointer-events: none;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .form{
+        margin-top: 10px;
+        padding: 10px 50px;  
+    }
+    .btnLogout{
+        background-color: black;
+        color: white;
+        padding: 5px 5px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .PageNameInput{
+        width: 90%;
+        height: 40px;
+        padding: 0px 10px;
+        outline: none;
+        border: 1px solid black;
+    }
 }

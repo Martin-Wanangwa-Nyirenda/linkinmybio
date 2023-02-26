@@ -69,7 +69,12 @@
     height: 175px;
     width: 175px; 
 }
-
+.userlinkwrapper{
+    display: flex;
+}
+.userLinkLabel{
+    padding-top: 7px;
+}
 .containerhead{
     display: flex;
     justify-content: space-between;
@@ -230,4 +235,273 @@
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 400px) {
+    .content{
+        width: 100%;
+        margin: 10px 1px;
+    }
+
+    .container{
+        width: 100%;
+        padding-top: 20px;
+    }
+    .userlinkwrapper{
+        display: flex;
+        align-content: center;
+    }
+    .containerhead{
+        display: flex;
+        justify-content: space-between;
+        max-width: 100%;
+        height: 30px;
+        margin: 0 9px;
+    }
+    .userlink{
+        padding: 5px 2px;
+        border: 1px solid black;
+        font-size: 12px;
+        margin: 0 1px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 170px;
+    }
+    .userLinkLabel{
+        padding: 6px 3px 0 0;
+        font-size: 12px;
+    }
+    .gridContainer {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 2px;
+    }
+    .btnCopy{
+        background-color: black;
+        color: white;
+        padding: 3px 3px;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        border: 1px solid black;
+    }
+    .userlinkwrapper{
+        margin-right: 3px;
+        padding-right: 2px;
+    }
+    .wrapImage{
+        height: 100px;
+        width: 100px; 
+    }
+
+    /* Dialogs */
+    .overlayForm{
+        position: fixed;
+        z-index: 1001;
+        background-color: whitesmoke;
+        top: 5%;
+        left: 1%;
+        padding: 20px 10px;
+        box-shadow: 4px 6px 10px lightgray;
+    }
+    .image{
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
+    }
+
+    .formInputs{
+        width: 250px;
+        height: 30px;
+        padding: 0px 10px;
+        outline: rgba(111, 66, 66, 0.675);
+        border: 1px solid black;
+    }
+    .btnCancel{
+        font-size: 16px;
+        color: black;
+        margin-right: 20px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+    .btnCancel:hover{
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+    }
+    .btnSave{
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid black;
+    }
+    
+    .btnSaveNotActive{
+        background-color: gray;
+        color: rgb(202, 189, 189);
+        padding: 5px 10px;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid white;
+        pointer-events: none;
+    }
+    
+    .btnDelete{
+        border: 1px solid black;
+        background-color: white;
+        padding: 4px 12px;
+        cursor: pointer;
+        font-weight: 500;
+        margin-right: 40px;
+        font-size: 16px;
+    }
+    .formBtns{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (min-device-width : 402px) and (max-device-width : 600px){
+    .content{
+        width: 100%;
+        margin: 10px 1px;
+    }
+
+    .container{
+        width: 100%;
+        padding-top: 20px;
+    }
+    .userlinkwrapper{
+        display: flex;
+        align-content: center;
+    }
+    .containerhead{
+        display: flex;
+        justify-content: space-between;
+        max-width: 100%;
+        height: 30px;
+        margin: 0 4px;
+    }
+    .userlink{
+        padding: 5px 2px;
+        border: 1px solid black;
+        font-size: 12px;
+        margin: 0 1px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 240px;
+    }
+    .userLinkLabel{
+        padding: 6px 3px 0 0;
+        font-size: 12px;
+    }
+    .gridContainer {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 3px;
+    }
+    .btnCopy{
+        background-color: black;
+        color: white;
+        padding: 3px 3px;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        border: 1px solid black;
+    }
+    .userlinkwrapper{
+        margin-right: 3px;
+        padding-right: 2px;
+    }
+    .wrapImage{
+        height: 130px;
+        width: 130px; 
+    }
+
+    /* Dialogs */
+    .overlayForm{
+        position: fixed;
+        z-index: 1001;
+        background-color: whitesmoke;
+        top: 5%;
+        left: 1%;
+        padding: 20px 10px;
+        box-shadow: 4px 6px 10px lightgray;
+        width: 100%;
+    }
+    .image{
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
+    }
+
+    .formInputs{
+        width: 350px;
+        height: 30px;
+        padding: 0px 10px;
+        outline: rgba(111, 66, 66, 0.675);
+        border: 1px solid black;
+    }
+    .btnCancel{
+        font-size: 16px;
+        color: black;
+        margin-right: 20px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+    .btnCancel:hover{
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+    }
+    .btnSave{
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid black;
+    }
+    
+    .btnSaveNotActive{
+        background-color: gray;
+        color: rgb(202, 189, 189);
+        padding: 5px 10px;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid white;
+        pointer-events: none;
+    }
+    
+    .btnDelete{
+        border: 1px solid black;
+        background-color: white;
+        padding: 4px 12px;
+        cursor: pointer;
+        font-weight: 500;
+        margin-right: 30px;
+        font-size: 16px;
+    }
+    .formBtns{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 20px;
+    }
 }

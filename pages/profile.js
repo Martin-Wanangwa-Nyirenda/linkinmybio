@@ -20,6 +20,11 @@ export default function Profile(){
     const [notification, setNotification] = useState("")
     const route = useRouter();
     
+    if(currentUser === null){
+        route.push("/auth/signin");
+        return
+    }
+    
     async function handleImageSelect(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -56,8 +61,7 @@ export default function Profile(){
     }
 
     function signout(){
-        route.push("/auth/signin")
-        logout()
+        route.push("/auth/signout")
     }
 
     useEffect(() => {
@@ -94,11 +98,13 @@ export default function Profile(){
                         setPageName(e.target.value)
                         setIsTextChanged(true)
                         }}/>
+
+                    <div className={styles.formcontrolbtns}>
+                            <button className={styles.btnLogout} onClick={() => signout()}>Logout</button>
+                            <button className={isTextChanged ? styles.btnSave : styles.btnSaveNotActive} onClick={() => UploadPageName()}>Save</button>
+                    </div>
                 </div>
-                <div className={styles.formcontrolbtns}>
-                        <button className={styles.btnLogout} onClick={() => signout()}>Logout</button>
-                        <button className={isTextChanged ? styles.btnSave : styles.btnSaveNotActive} onClick={() => UploadPageName()}>Save</button>
-                </div>
+                
                 <Notification notification={notification}/>
             </div>
             

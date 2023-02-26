@@ -8,6 +8,8 @@ import React from 'react';
 import UploadForm  from '../components/UploadForm';
 import EditForm from '../components/EditForm';
 import NavBar from '../components/navbar';
+import { createShareURL } from '../lib/helperFunctions';
+import { useRouter } from "next/router";
 
 export default function dashboard() {
   const { userInfo, currentUser } = useAuth()
@@ -17,8 +19,15 @@ export default function dashboard() {
   const [uploaded, setUploaded] = useState(0)//Updates everytime an upload happens to cause a useEffect
   const [isEditFormMounted, setIsEditFormMounted] = useState(false)
   const [selectedPost, setSelected] = useState("")
+  const [isCopied, setIsCopied] = useState(false);
   const inputRef = React.useRef(null)
-  const [userlink, setUserLink] = useState("https://nextjs.org/docs/messages/fast-refresh-reload")
+  const shareURL = createShareURL(currentUser.uid);
+  const route = useRouter()
+  if(currentUser === null){
+    route.push("/auth/signin");
+    return
+  }
+
 
   function changeFormVisibilityState(){
     setShowForm(!showForm);
@@ -51,6 +60,13 @@ export default function dashboard() {
     }
   }, [currentUser.uid, uploaded]);
 
+  function handleCopyText(){
+    navigator.clipboard.writeText(shareURL);
+    setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+    }, 1500);
+  }
   return (
     <div>
       <NavBar />
@@ -61,9 +77,11 @@ export default function dashboard() {
 
         <div className={styles.containerhead}>
           <div className={styles.userlinkwrapper}>
-            <span className={styles.userLinkLabel}>Your link</span>
-            <span className={styles.userlink}>{userlink}</span>
-            <button className={styles.btnCopy}>Copy</button>
+            <span className={styles.userLinkLabel}>URL</span>
+            <div className={styles.userlink}>{shareURL}</div>
+            <button className={styles.btnCopy} onClick={() => handleCopyText()}>
+              <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+            </button>
           </div>
           <button className={styles.addpostbtn} onClick={() => changeFormVisibilityState()}>Add Post</button>
         </div>
@@ -74,9 +92,7 @@ export default function dashboard() {
                   queriedData.map(post =>(
                   <div className={styles.gridItem} key={post.id} onClick={() => {changeEditFormVisibility(post.id)}}>
                         <div className={styles.itemWrap}>
-                          {post.imageUrl && <Image className={styles.wrapImage} src={post.imageUrl} alt="Image"
-                          height={175}
-                          width={175}/> }
+                          {post.imageUrl && <img className={styles.wrapImage} src={post.imageUrl} alt="Image"/> }
                         </div>
                   </div>
               )) : <p>Loading...</p>}

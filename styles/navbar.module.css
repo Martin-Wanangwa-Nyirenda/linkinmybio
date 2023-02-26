@@ -27,6 +27,72 @@
 }
 .profilename{
     font-size: 14px;
-    padding-top: 3px;
+    padding: 3px 0;
     color: black;
+}
+@media only screen and (min-width: 320px) and (max-width: 400px){
+    .profileimage{
+        width: 18px;
+        height: 18px;
+        margin-left: 10px;
+    }
+    .profilename{
+        font-size: 14px;
+        padding: 3px 0;
+        color: black;
+    }
+    .navbarlogo{
+        font-weight: 500;
+    }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 10px 2px;
+        box-shadow: 1px 5px 2px lightblue;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 400px){
+    .profileimage{
+        width: 18px;
+        height: 18px;
+        margin-left: 10px;
+    }
+    .profilename{
+        font-size: 14px;
+        padding: 3px 0;
+        color: black;
+    }
+    .navbarlogo{
+        font-weight: 500;
+    }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 10px 2px;
+        box-shadow: 1px 5px 2px lightblue;
+    }
+}
+@media only screen and (min-device-width : 402px) and (max-device-width : 600px){
+    .profileimage{
+        width: 18px;
+        height: 18px;
+        margin-left: 10px;
+    }
+    .profilename{
+        font-size: 14px;
+        padding: 3px 0;
+        color: black;
+    }
+    .navbarlogo{
+        font-weight: 500;
+    }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 10px 2px;
+        box-shadow: 1px 5px 2px lightblue;
+    }
 }

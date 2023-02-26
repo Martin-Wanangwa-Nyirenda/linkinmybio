@@ -1,15 +1,17 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useAuth } from '../../context/AuthContext'
-import styles from '../../styles/dashboard.module.css'
+import styles from '../../styles/posts.module.css'
 import Image from 'next/image';
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '../../lib/firebase';
-
+import { db, storage } from '../../lib/firebase';
+import { doc, getDoc } from "firebase/firestore";
+import {ref, getDownloadURL} from 'firebase/storage';
 
 export default function Posts(){
   const [queriedData, setQueriedData] = useState([]);
+  const [profileImage, setProfileImage] = useState("")
+  const [pageName, setPageName] = useState("")
   const router = useRouter()
   const posts = router.query.posts;
 
@@ -30,33 +32,43 @@ export default function Posts(){
       fetchData();
     }
   }, [posts]);
+
+  useEffect(() => {
+      async function fetchData() {
+        const userRef = doc(db, "users", posts);
+        const snapshot = await getDoc(userRef);
+        const data = snapshot.data()
+        const imageRef = ref(storage, data.profileImage);
+        let downloadUrl = await getDownloadURL(imageRef);
+        setProfileImage(downloadUrl)
+        setPageName(data.pagename)
+      }
+      fetchData();
+  });
   
   return(
-    <div className={styles.content}>
-        <div className={styles.head}>
-            <div className={styles.logo}>
-                <Image className={styles.logoImage} src="/images/ads/Logo.jpg" alt="techtrends"
-                height={95}
-                width={95}/>
-                <h1 className={styles.logoText}>Techtrends</h1>
-            </div>
-        </div>
-        
-        <div className={styles.gridContainer}>
-        
-        {posts !== undefined ? 
-          queriedData.map(post =>(
-              <div className={styles.gridItem} key={post.id}>
-                    <Link href={post.BlogPostURL}>
-                    <div className={styles.itemWrap}>
-                      <Image className={styles.wrapImage} src={post.imageUrl} alt="This is random text"
-                      height={175}
-                      width={175}/>
-                    </div>
-                  </Link>
+    <div className={styles.container}>
+      <div className={styles.head}>
+              <div className={styles.logo}>
+                  <img className={styles.logoImage} src={profileImage}/>
+                  <h1 className={styles.logoText}>{pageName}</h1>
               </div>
-            )) : <p>Loading...</p>}
         </div>
+      <div className={styles.contentposts}>
+          <div className={styles.gridContainer}>
+          {posts !== undefined ? 
+            queriedData.map(post =>(
+                <div className={styles.gridItem} key={post.id}>
+                      <Link href={post.BlogPostURL}>
+                      <div className={styles.itemWrap}>
+                        <img className={styles.wrapImage} src={post.imageUrl} alt="Image"/>
+                      </div>
+                    </Link>
+                </div>
+              )) : <p>Loading...</p>}
+          </div>
+      </div>
+
     </div>
   )
 }
