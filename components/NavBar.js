@@ -29,7 +29,7 @@ export default function NavBar(){
       }, [currentUser.uid]);
     return(
         <nav className={styles.navbar}>
-            <div className={styles.navbarlogo}>LinkInMybio</div>
+            <a href='/' className={styles.navbarlogo}>LinkInMybio</a>
             <Link href="/profile">
                 <div className={styles.navbarprofile}>
                     <span className={styles.profilename}>{pagename}</span>
